@@ -1,82 +1,145 @@
-@import url(https://fonts.googleapis.com/css?family=Lato);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900);
-
-* {
+html {
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-}
-body {
-    background: #F39C12;
-    margin: 0px;
-    font-family: 'Lato', sans-serif
-}
-.header {
-    padding: 100px 0;
-    text-align: center;
-    background: url(https://kodilla.com/static/lessons/pizza.jpg) 20% 60% no-repeat;
-    background-size: cover;
-}
-.top {
-    max-width: 800px;
-    margin: auto;
-    color: white;
-    background-color: rgba(39, 174, 96, 0.8);
-    border-radius: 10px;
-    padding: 30px;
-}
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0; }
 
-.top h1{
-    font-family: 'Raleway', sans-serif;
-    text-decoration: underline;
-    font-size:40px;
-}
+input,
+textarea {
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+    border-radius: 2px;
+    border: 1px solid #ccc; }
+
+body {
+    margin: 0;
+    padding: 0; }
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit; }
+
+.crud {
+    margin-bottom: 20px; }
 
 .container {
-    background-color: white;
-    padding: 50px;
-    margin: 50px auto;
-    height: 80%;
-    max-width: 700px;
-}
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto; }
 
-table {
-    width: 100%;
+@media (min-width: 768px) {
+    .container {
+        width: 750px; } }
+@media (min-width: 992px) {
+    .container {
+        width: 970px; } }
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px; } }
+.kodilla-heading--main {
     margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table th, table td{
-    border: 1px solid #d35400;
-    padding: 5px;
-}
-
-table th{
-    background: #E78925;
-}
-
-tr:hover{
-    background: #E78925;
-}
-
-.info {
-    padding: 50px 0;
-    background: #0b0b0b;
-    color: white;
     text-align: center;
-}
-.info h3 {
+    font-size: 30px;
+    font-weight: 400; }
+
+.datatable__row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin: 0; }
+
+.datatable__row:first-of-type {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px; }
+
+.datatable__row:last-of-type {
+    border-bottom: 1px solid #ccc;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px; }
+
+.datatable__row input,
+.datatable__row textarea {
+    display: none; }
+
+.datatable__row .datatable__button--editing {
+    display: none; }
+
+.datatable__row--editing input,
+.datatable__row--editing textarea {
+    display: block; }
+
+.datatable__row--editing .datatable__field-value {
+    display: none; }
+
+.datatable__row--editing .datatable__button {
+    display: none; }
+
+.datatable__row--editing .datatable__button--editing {
+    display: block; }
+
+.datatable__row--add input,
+.datatable__row--add textarea {
+    display: block; }
+
+.datatable__field-value {
     margin-bottom: 0;
-    color: #E78925;
-}
+    font-size: 14px; }
 
-i.fa {
-    line-height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    background-color: #333;
-    margin: 0 auto;
-}
+.datatable__row-section {
+    border: none;
+    margin: 0;
+    padding: 10px;
+    flex-grow: 1; }
 
-.info p {
-    margin: 5px auto 40px;
-    width: 300px;
+.datatable__row-section--button-section {
+    margin-left: auto;
+    align-self: center;
+    flex-shrink: 1;
+    flex-grow: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center; }
+
+.datatable__input-label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    margin: 5px auto;
+    font-weight: 500;
+    letter-spacing: 0.6px; }
+
+.datatable__button {
+    color: #fff;
+    background-color: #28a745;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 120px;
+    line-height: 1.25;
+    border-radius: 4px; }
+
+.datatable__tasks-container:empty {
+    position: relative; }
+
+.datatable__tasks-container:empty::after {
+    content: 'Currently, there are no tasks available.'; }
+
+.template {
+    display: none;
 }
