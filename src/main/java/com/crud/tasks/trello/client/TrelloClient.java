@@ -57,9 +57,9 @@ public class TrelloClient {
     }
 
     public URI buildUrl(){
-        return 	UriComponentsBuilder.newInstance()
-                .scheme("https")
-                .host(trelloConfig.getTrelloApiEndpoint())
+        return 	UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint())
+                //.scheme("https")
+                //.host(trelloConfig.getTrelloApiEndpoint())
                 .path("/1/members/{value}/boards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())                                                             // [2]
                 .queryParam("token", trelloConfig.getTrelloToken())                                                            // [3]
