@@ -1,5 +1,6 @@
 package com.crud.tasks.trello.client;
 
+import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
@@ -23,7 +24,7 @@ public class TrelloClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
     private final RestTemplate restTemplate;
-    private final com.crud.tasks.trello.config.TrelloConfig trelloConfig;
+    private final TrelloConfig trelloConfig;
 
     public List<TrelloBoardDto> getTrelloBoards() {
         URI url = buildUrl();
@@ -57,7 +58,20 @@ public class TrelloClient {
     }
 
     public URI buildUrl(){
-        return 	UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint())
+
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/" + trelloConfig.getUsername() + "/boards")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "name,id")
+                .queryParam("lists","all")
+                .build()
+                .encode()
+                .toUri();
+
+        return url;
+
+                /*
+                UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint())
                 //.scheme("https")
                 //.host(trelloConfig.getTrelloApiEndpoint())
                 .path("/1/members/{value}/boards")
@@ -66,6 +80,6 @@ public class TrelloClient {
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all")// [4]
                 .buildAndExpand(trelloConfig.getUsername()).encode().toUri();
-
+                */
     }
 }
