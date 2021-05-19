@@ -14,7 +14,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class SimspleEmailServiceTest {
+class SimpleEmailServiceTest {
 
     @InjectMocks
     private SimpleEmailService simpleEmailService;
@@ -23,9 +23,36 @@ class SimspleEmailServiceTest {
     private JavaMailSender javaMailSender;
 
     @Test
-    public void shouldSendEmail() {
+    public void shouldSendEmailWithCC() {
         //Given
-        Mail mail = new Mail("test@test.com", "Test", "Test Message");
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .message("test")
+                .subject("test")
+                .toCC("test2@test.com")
+                .build();
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+        mailMessage.setCc(mail.getToCC());
+
+        //When
+        simpleEmailService.send(mail);
+
+        //Then
+        verify(javaMailSender, times(1)).send(mailMessage);
+    }
+
+    @Test
+    public void shouldSendEmailWithoutCC() {
+        //Given
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .message("test")
+                .subject("test")
+                .build();
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
