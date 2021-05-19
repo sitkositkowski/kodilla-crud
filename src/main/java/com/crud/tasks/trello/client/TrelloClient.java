@@ -68,6 +68,8 @@ public class TrelloClient {
                 .encode()
                 .toUri();
 
+        System.out.println(url);
+
         return url;
 
                 /*

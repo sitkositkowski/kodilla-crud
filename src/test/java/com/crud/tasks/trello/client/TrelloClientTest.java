@@ -4,7 +4,7 @@ import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.domain.TrelloListDto;
-import com.crud.tasks.trello.config.TrelloConfig;
+import com.crud.tasks.config.TrelloConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class TrelloClientTest {
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
         // Given
-        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("test.com");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
         when(trelloConfig.getUsername()).thenReturn("test");
@@ -44,7 +44,7 @@ class TrelloClientTest {
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
-        URI uri = new URI("https://test.com/1/members/test/boards?key=test&token=test&fields=name,id&lists=all");
+        URI uri = new URI("http://test.com/members/test/boards?key=test&token=test&fields=name,id&lists=all");
 
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
         // When
@@ -92,12 +92,12 @@ class TrelloClientTest {
     void shouldReturnEmptyList() throws URISyntaxException{
         // Given
 
-        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("test.com");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
         when(trelloConfig.getUsername()).thenReturn("test");
 
-        URI uri = new URI("https://test.com/1/members/test/boards?key=test&token=test&fields=name,id&lists=all");
+        URI uri = new URI("http://test.com/members/test/boards?key=test&token=test&fields=name,id&lists=all");
 
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
 
