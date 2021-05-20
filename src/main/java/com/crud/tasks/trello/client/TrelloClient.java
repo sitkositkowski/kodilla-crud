@@ -1,13 +1,12 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.config.TrelloConfig;
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +14,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +39,7 @@ public class TrelloClient {
 
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
@@ -51,10 +49,10 @@ public class TrelloClient {
                 .queryParam("idList", trelloCardDto.getListId())
                 .build().encode().toUri();
 
-        CreatedTrelloCard createdTrelloCard = restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        CreatedTrelloCardDto createdTrelloCardDto = restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
 
 
-        return createdTrelloCard;
+        return createdTrelloCardDto;
     }
 
     public URI buildUrl(){
