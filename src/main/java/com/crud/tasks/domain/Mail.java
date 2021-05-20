@@ -6,6 +6,7 @@ import java.util.Optional;
 
 @Builder
 @Getter
+@AllArgsConstructor
 public class Mail {
     private final String mailTo;
     private final String subject;
