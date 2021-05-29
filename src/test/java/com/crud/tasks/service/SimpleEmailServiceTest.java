@@ -39,7 +39,7 @@ class SimpleEmailServiceTest {
         mailMessage.setCc(mail.getToCC());
 
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.send(mail, false);
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
@@ -60,7 +60,7 @@ class SimpleEmailServiceTest {
         mailMessage.setText(mail.getMessage());
 
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.send(mail, false);
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
